@@ -36,10 +36,13 @@ public class Runner {
 		}
 		
 		
-		game.add_wall(new Wall(0, 0, game.get_resolution_width(), 20));
-		game.add_wall(new Wall(0, 280, game.get_resolution_width(), 20));
-		game.add_wall(new Wall(0, 0, 20, game.get_resolution_height()));
-		game.add_wall(new Wall(game.get_resolution_width()-20, 0, 20, game.get_resolution_height()));
+		game.add_wall(new Wall(0, 0, game.get_game_width(), 20));
+		game.add_wall(new Wall(0, game.get_game_height()-20, game.get_game_width(), 20));
+		game.add_wall(new Wall(0, 0, 20, game.get_game_height()));
+		game.add_wall(new Wall(game.get_game_width()-20, 0, 20, game.get_game_height()));
+
+		game.add_wall(new Wall(game.get_game_width()/4, game.get_game_height()/2, 20, game.get_game_height()/2));
+		game.add_wall(new Wall(game.get_game_width()/2, game.get_game_height()/2, 100, 20));
 		
 		game.start();
 	}

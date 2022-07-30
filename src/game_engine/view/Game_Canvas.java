@@ -29,7 +29,7 @@ public class Game_Canvas extends Canvas {
 		requestFocus();
 		addKeyListener(Keyboard.get_Instance());
 		
-		image = new BufferedImage(game.get_resolution_width(), game.get_resolution_height(), BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(game.get_game_width(), game.get_game_height(), BufferedImage.TYPE_INT_RGB);
 		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 		
 		Dimension size = new Dimension(game.get_resolution_width(), game.get_resolution_height());
@@ -52,20 +52,11 @@ public class Game_Canvas extends Canvas {
 		clear();
 		
 		Timer game_over = Game_Engine.game_over;
-		if (!game_over.over) {
-			if (Runner.get_context().get_player().get_Health() <= 0 && !game_over.running) {
-				result = "LOSE";
-				game_over.tick();
-			}
-			
-			if (Runner.get_context().get_enemy().get_Health() <= 0 && !game_over.running) {
-				result = "WIN";
-				game_over.tick();
-			}
-		}
-		
 		//Draw
-		if (game_over.running) {
+		if (Runner.get_context().get_player().get_Health() <= 0 && !game_over.running) {
+			result = "GAME OVER";
+			game_over.tick();
+		} else if (game_over.running) {
 			draw_Entity(250, 150, 100, 100, result);
 		} else {
 			Runner.get_context().get_entity_manager().render();

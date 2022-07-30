@@ -14,21 +14,11 @@ public class Player extends Living {
 	
 	@Override
 	public void update() {
-		move();
-		
-		if (Runner.get_context().get_Testing()) {
-			update_Agent();
-		} else {
-			input();
-		}
-	}
-	
-	private void update_Agent() {
-		Runner.get_context().get_game_engine().set_fps(1000);
+		super.update();
+		input();
 	}
 	
 	private void input() {
-		Runner.get_context().get_game_engine().set_fps(15);
 		if (Keyboard.UP) {
 			jump();
 			

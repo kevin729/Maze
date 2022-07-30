@@ -8,7 +8,7 @@ public class Game_Engine {
 	
 	public static Timer game_over;
 	
-	private int fps = 15;
+	private int fps = 30;
 	
 	private boolean is_running = false;
 	private Game_Canvas game_Canvas;

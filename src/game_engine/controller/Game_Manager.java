@@ -13,8 +13,8 @@ public class Game_Manager implements I_Game_Manager {
 	private  Entity_Manager entity_Manager;
 	private int resolution_Width = 600;
 	private int resolution_Height = 300;
-	private int game_Width = 600;
-	private int game_Height = 300;
+	private int game_Width = 900;
+	private int game_Height = 600;
 	private boolean testing = false;
 	
 	public Game_Manager() {

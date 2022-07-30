@@ -210,6 +210,11 @@ public abstract class Living extends Entity {
 		action = action == "JUMP" ? action : "RIGHT";
 		move_x_axis(speed);
 	}
+
+	@Override
+	public void update() {
+		move();
+	}
 	
 	public void move_x_axis(double new_x_speed) {
 		x_speed += new_x_speed;

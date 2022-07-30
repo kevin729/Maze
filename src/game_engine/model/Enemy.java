@@ -15,7 +15,8 @@ public class Enemy extends Living {
 	
 	@Override
 	public void update() {
-		move();
+		super.update();
+
 	}
 
 	@Override
