@@ -23,7 +23,7 @@ public class Game_Engine {
 		
 		keyboard = Keyboard.get_Instance();
 		game_Canvas.addKeyListener(keyboard);
-		game_over = new Timer(1000);
+		game_over = new Timer(2);
 	}
 	
 	public void set_fps(int _fps) {

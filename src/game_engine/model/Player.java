@@ -9,12 +9,13 @@ public class Player extends Living {
 	
 	public Player(int x, int y, int width, int height) {
 		super(x, y, width, height, "Player");
-		
+
 	}
 	
 	@Override
 	public void update() {
 		super.update();
+		apply_gravity(0.5);
 		input();
 	}
 	
@@ -27,17 +28,17 @@ public class Player extends Living {
 			} else if (Keyboard.LEFT) {
 				left();
 			}
-		} else if (Keyboard.BLOCK) {
-			block();
-		} else if (Keyboard.ATTACK) {
-			attack();
-		} else if (Keyboard.LONG) {
-			long_attack();
-		} else if (Keyboard.RIGHT) {
-			right();
-		} else if (Keyboard.LEFT) {
-			left();
 		}
+		if (Keyboard.BLOCK)
+			block();
+		if (Keyboard.ATTACK)
+			attack();
+		if (Keyboard.LONG)
+			long_attack();
+		if (Keyboard.RIGHT)
+			right();
+		if (Keyboard.LEFT)
+			left();
 	}
 	
 	@Override

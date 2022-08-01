@@ -12,7 +12,7 @@ public class Wall extends Entity {
 	
 	@Override
 	public void update() {
-		
+		y -= 1;
 	}
 
 	@Override

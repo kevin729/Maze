@@ -10,16 +10,15 @@ import game_engine.model.Wall;
 
 public class Game_Manager implements I_Game_Manager {
 	private  Game_Engine game_Engine;
-	private  Entity_Manager entity_Manager;
 	private int resolution_Width = 600;
 	private int resolution_Height = 300;
 	private int game_Width = 900;
 	private int game_Height = 600;
 	private boolean testing = false;
+	private Level level;
 	
 	public Game_Manager() {
 		game_Engine = new Game_Engine(this);
-		entity_Manager = new Entity_Manager();
 	}
 	
 	@Override
@@ -29,18 +28,18 @@ public class Game_Manager implements I_Game_Manager {
 	
 	@Override
 	public void stop() {
-		entity_Manager.remove_entities();
+		level.getEm().remove_entities();
 		game_Engine.stop();
 	}
 
 	@Override
 	public void add_player(Player p) {
-		entity_Manager.add_entity(p);
+		level.getEm().add_entity(p);
 	}
 
 	@Override
 	public void add_enemy(Enemy e) {
-		entity_Manager.add_entity(e);
+		level.getEm().add_entity(e);
 	}
 
 	@Override
@@ -75,22 +74,32 @@ public class Game_Manager implements I_Game_Manager {
 	
 	@Override
 	public ArrayList<Entity> get_entities() {
-		return entity_Manager.get_entities();
+		return level.getEm().get_entities();
 	}
 
 	@Override
 	public void add_wall(Wall w) {
-		entity_Manager.add_entity(w);
+		level.getEm().add_entity(w);
 	}
 
 	@Override
 	public Entity_Manager get_entity_manager() {
-		return entity_Manager;
+		return level.getEm();
 	}
 
 	@Override
 	public void render_entity(double x, double y, double w, double h, String text) {
 		game_Engine.get_Canvas().draw_Entity((int)x, (int)y, (int)w, (int)h, text);
+	}
+
+	@Override
+	public Level getLevel() {
+		return level;
+	}
+
+	@Override
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 
 	@Override
@@ -128,8 +137,12 @@ public class Game_Manager implements I_Game_Manager {
 		return testing;
 	}
 
+
+
 	@Override
 	public void set_Testing(boolean _testing) {
 		testing = _testing;
 	}
+
+
 }

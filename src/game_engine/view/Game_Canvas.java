@@ -57,9 +57,9 @@ public class Game_Canvas extends Canvas {
 			result = "GAME OVER";
 			game_over.tick();
 		} else if (game_over.running) {
-			draw_Entity(250, 150, 100, 100, result);
+			draw_Entity((Runner.get_context().get_game_width()/2)-150, (Runner.get_context().get_game_height()/2), 100, 100, result);
 		} else {
-			Runner.get_context().get_entity_manager().render();
+			Runner.get_context().getLevel().render();
 		}
 			
 		//Render

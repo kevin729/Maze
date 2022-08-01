@@ -32,4 +32,7 @@ public interface I_Game_Manager {
 	public void stop();
 	public void render_entity(double x, double y, double w, double h, int c);
 	public void render_entity(double x, double y, double w, double h, String t);
+
+	public Level getLevel();
+	public void setLevel(Level level);
 }
