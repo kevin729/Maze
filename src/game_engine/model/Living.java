@@ -13,7 +13,7 @@ public abstract class Living extends Entity {
 	public String action = "STILL";
 	
 	protected int health = 20;
-	protected int speed = 5;
+	protected int speed = 6;
 	
 	public int attack_x;
 	public int attack_y;
@@ -62,13 +62,13 @@ public abstract class Living extends Entity {
 				eX += entity.x_speed;
 				eY += entity.y_speed;
 			}
-			
+
 			//up
 			if ((_y > entity.y  && _y < entity.y + entity.height) && 
 				(x < entity.x + entity.width && x + width > entity.x)) {
 				entities.add(entity);
 				if (movement_detection) {
-					//move_y_axis(-y_speed);
+					entity.y += y_speed;
 				}
 			}
 			
@@ -95,13 +95,12 @@ public abstract class Living extends Entity {
 					entity.x_speed = -speed;
 				}
 			}
-			
+
 			//bottom
 			if ((_y + height > eY && _y + height < eY + entity.height) &&
-				(x <= eX + entity.width && x + width >= eX)) {
+					(x <= eX + entity.width && x + width >= eX)) {
 				//entities.add(entity.get_name());
 				if (movement_detection) {
-
 					grounded = true;
 					move_y_axis(-y_speed);
 				}
@@ -135,16 +134,15 @@ public abstract class Living extends Entity {
 		}
 	}
 	
-	private void move() {
+	protected void move() {
 		limit_x_speed(speed);
 
-		//apply_gravity(0.5);
+		apply_gravity(0.5);
 		collision_detect(true);
+
+		set_Position();
 		
-		x += x_speed > 0 ? Math.ceil(x_speed) : x_speed;
-		y += y_speed;
-		
-		apply_friction(0.1);
+		apply_friction(1);
 		
 		attack_width = 0;
 		attack_height = 0;
@@ -153,6 +151,11 @@ public abstract class Living extends Entity {
 		block_height = 0;
 		
 		action = "STILL";
+	}
+
+	protected void set_Position() {
+		x += x_speed > 0 ? Math.ceil(x_speed) : x_speed;
+		y += y_speed;
 	}
 
 	private void detect_attack() {

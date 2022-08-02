@@ -15,7 +15,6 @@ public class Player extends Living {
 	@Override
 	public void update() {
 		super.update();
-		apply_gravity(0.5);
 		input();
 	}
 	

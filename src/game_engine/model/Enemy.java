@@ -16,7 +16,6 @@ public class Enemy extends Living {
 	@Override
 	public void update() {
 		super.update();
-		y_speed -= 00.1;
 	}
 
 	@Override
