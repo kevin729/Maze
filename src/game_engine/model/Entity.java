@@ -11,7 +11,9 @@ public abstract class Entity {
 	protected int x, y, width, height;
 	protected double x_speed, y_speed;
 	protected boolean grounded = false;
-		
+	protected boolean bottom;
+	protected boolean alive = true;
+
 	public Entity(int _x, int _y, int _width, int _height, String _name) {
 		name = _name;
 		x = _x;

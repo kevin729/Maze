@@ -35,10 +35,10 @@ public abstract class Living extends Entity {
 	}
 	
 	public ArrayList<Entity> collision_detect(boolean movement) {
-		return collision_detect(x, y, width, height, movement);
+		return collision_detect(x, y, width, height, movement, false);
 	}
 	
-	public ArrayList<Entity> collision_detect(int x, int y, int width, int height, boolean movement_detection) {
+	public ArrayList<Entity> collision_detect(int x, int y, int width, int height, boolean movement_detection, boolean combat) {
 		ArrayList<Entity> entities = new ArrayList<>();
 		
 		if (width == 0 || height == 0) {
@@ -64,11 +64,23 @@ public abstract class Living extends Entity {
 			}
 
 			//up
-			if ((_y > entity.y  && _y < entity.y + entity.height) && 
+			if ((_y >= entity.y  && _y <= entity.y + entity.height) &&
 				(x < entity.x + entity.width && x + width > entity.x)) {
 				entities.add(entity);
+				if (!movement_detection && !combat) {
+					entity.y = y - entity.height - 1;
+					entity.bottom = true;
+				}
+			}
+
+			//bottom
+			if ((_y + height >= eY && _y + height <= eY + entity.height) &&
+					(x <= eX + entity.width && x + width >= eX)) {
+				//entities.add(entity.get_name());
 				if (movement_detection) {
-					entity.y += y_speed;
+					grounded = true;
+					move_y_axis(-y_speed);
+					bottom = true;
 				}
 			}
 			
@@ -76,37 +88,35 @@ public abstract class Living extends Entity {
 			if ((_x + width >= entity.x && _x + width < entity.x + entity.width) && 
 				(y < entity.y + entity.height && y + height > entity.y)) {
 				entities.add(entity);
-				if (movement_detection) {
+				if (movement_detection && !bottom && !combat) {
 					this.x = entity.x - width;
 					move_x_axis(-x_speed);
-				} else {
-					entity.x_speed = speed;
-				}
+				} else if (!combat) {
+					x_speed = 0;
+					y_speed = 0;
+					grounded = true;
+				} else if (combat && entity.alive) {
+                    entity.x_speed = speed;
+                }
 			}
 			
 			//left
 			if ((_x >= entity.x && _x < entity.x + entity.width) && 
 				(y < entity.y + entity.height && y + height > entity.y)) {
 				entities.add(entity);
-				if (movement_detection) {
+				if (movement_detection && !bottom && !combat) {
 					this.x = entity.x + entity.width;
 					move_x_axis(-x_speed);
-				} else {
-					entity.x_speed = -speed;
-				}
-			}
-
-			//bottom
-			if ((_y + height > eY && _y + height < eY + entity.height) &&
-					(x <= eX + entity.width && x + width >= eX)) {
-				//entities.add(entity.get_name());
-				if (movement_detection) {
+				} else if (!combat) {
+					x_speed = 0;
+					y_speed = 0;
 					grounded = true;
-					move_y_axis(-y_speed);
-				}
+				} else if (combat && entity.alive) {
+                    entity.x_speed = -speed;
+                }
 			}
 		}
-		
+		bottom = false;
 		return entities;
 	}
 	
@@ -138,10 +148,7 @@ public abstract class Living extends Entity {
 		limit_x_speed(speed);
 
 		apply_gravity(0.5);
-		collision_detect(true);
-
-		set_Position();
-		
+		set_Position(true);
 		apply_friction(1);
 		
 		attack_width = 0;
@@ -153,13 +160,14 @@ public abstract class Living extends Entity {
 		action = "STILL";
 	}
 
-	protected void set_Position() {
+	protected void set_Position(boolean movement) {
+		collision_detect(movement);
 		x += x_speed > 0 ? Math.ceil(x_speed) : x_speed;
 		y += y_speed;
 	}
 
 	private void detect_attack() {
-		ArrayList<Entity> entities = collision_detect(attack_x, attack_y, attack_width, attack_height, false);
+		ArrayList<Entity> entities = collision_detect(attack_x, attack_y, attack_width, attack_height, false, true);
 		for (Entity e : entities) {
 			if (e instanceof Living) {
 				((Living) e).take_damage(4);
@@ -214,8 +222,9 @@ public abstract class Living extends Entity {
 		if (!hit_Timer.running) {
 			health -= damage;
 			hit_Timer.tick();
+			//jump();
 		}
-		
+
 		return hit;
 	}
 	
