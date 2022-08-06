@@ -1,8 +1,9 @@
-package game_engine.model;
+package game_engine.model.object;
 
 import java.awt.Color;
 
 import game_engine.controller.Runner;
+import game_engine.model.Entity;
 
 public class Wall extends Entity {
 

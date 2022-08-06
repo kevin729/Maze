@@ -1,9 +1,12 @@
-package game_engine.model;
+package game_engine.model.living;
 
 import java.awt.Color;
+import java.util.List;
 
 import game_engine.controller.Runner;
 import game_engine.controller.input.Keyboard;
+import game_engine.model.Entity;
+import game_engine.model.object.Door;
 
 public class Player extends Living {
 	
@@ -16,7 +19,15 @@ public class Player extends Living {
 	public void update() {
 		super.update();
 		input();
+
+		collided_entities.stream()
+				         .forEach(entity -> {
+							 if (entity.get_name().equals("Door")) {
+								 ((Door)entity).enter();
+							 }
+						 });
 	}
+
 	
 	private void input() {
 		if (Keyboard.UP) {

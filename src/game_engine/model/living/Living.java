@@ -1,9 +1,11 @@
-package game_engine.model;
+package game_engine.model.living;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import game_engine.controller.Runner;
 import game_engine.controller.Timer;
+import game_engine.model.Entity;
 
 
 public abstract class Living extends Entity {
@@ -29,97 +31,18 @@ public abstract class Living extends Entity {
 	public int long_y;
 	public int long_width = 0;
 	public int long_height = 0;
-	
+
+	public List<Entity> collided_entities = new ArrayList<>();
+
 	public Living(int _x, int _y, int _width, int _height, String _name) {
 		super(_x, _y, _width, _height, _name);
+		alive = true;
 	}
 	
 	public ArrayList<Entity> collision_detect(boolean movement) {
 		return collision_detect(x, y, width, height, movement, false);
 	}
-	
-	public ArrayList<Entity> collision_detect(int x, int y, int width, int height, boolean movement_detection, boolean combat) {
-		ArrayList<Entity> entities = new ArrayList<>();
-		
-		if (width == 0 || height == 0) {
-			return entities;
-		}
-		
-		for (Entity entity : Runner.get_context().get_entities()) {
-			if (entity == this)
-				continue;
-			
-			int _x = x;
-			int _y = y;
 
-			int eX = entity.x;
-			int eY = entity.y;
-			
-			//predicted location
-			if (movement_detection) {
-				_x += x_speed;
-				_y += y_speed;
-				eX += entity.x_speed;
-				eY += entity.y_speed;
-			}
-
-			//up
-			if ((_y >= entity.y  && _y <= entity.y + entity.height) &&
-				(x < entity.x + entity.width && x + width > entity.x)) {
-				entities.add(entity);
-				if (!movement_detection && !combat) {
-					entity.y = y - entity.height - 1;
-					entity.bottom = true;
-				}
-			}
-
-			//bottom
-			if ((_y + height >= eY && _y + height <= eY + entity.height) &&
-					(x <= eX + entity.width && x + width >= eX)) {
-				//entities.add(entity.get_name());
-				if (movement_detection) {
-					grounded = true;
-					move_y_axis(-y_speed);
-					bottom = true;
-				}
-			}
-			
-			//right
-			if ((_x + width >= entity.x && _x + width < entity.x + entity.width) && 
-				(y < entity.y + entity.height && y + height > entity.y)) {
-				entities.add(entity);
-				if (movement_detection && !bottom && !combat) {
-					this.x = entity.x - width;
-					move_x_axis(-x_speed);
-				} else if (!combat) {
-					x_speed = 0;
-					y_speed = 0;
-					grounded = true;
-				} else if (combat && entity.alive) {
-                    entity.x_speed = speed;
-                }
-			}
-			
-			//left
-			if ((_x >= entity.x && _x < entity.x + entity.width) && 
-				(y < entity.y + entity.height && y + height > entity.y)) {
-				entities.add(entity);
-				if (movement_detection && !bottom && !combat) {
-					this.x = entity.x + entity.width;
-					move_x_axis(-x_speed);
-				} else if (!combat) {
-					x_speed = 0;
-					y_speed = 0;
-					grounded = true;
-				} else if (combat && entity.alive) {
-                    entity.x_speed = -speed;
-                }
-			}
-		}
-		bottom = false;
-		return entities;
-	}
-	
 	private void limit_x_speed(int max_speed_x) {
 		if (x_speed > max_speed_x) {
 			x_speed = max_speed_x;
@@ -158,10 +81,13 @@ public abstract class Living extends Entity {
 		block_height = 0;
 		
 		action = "STILL";
+
+
 	}
 
 	protected void set_Position(boolean movement) {
-		collision_detect(movement);
+		collided_entities = new ArrayList<>();
+		collided_entities = collision_detect(movement);
 		x += x_speed > 0 ? Math.ceil(x_speed) : x_speed;
 		y += y_speed;
 	}

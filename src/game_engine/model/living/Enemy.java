@@ -1,4 +1,4 @@
-package game_engine.model;
+package game_engine.model.living;
 
 import java.awt.Color;
 import java.text.DecimalFormat;

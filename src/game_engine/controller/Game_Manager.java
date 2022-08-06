@@ -2,11 +2,11 @@ package game_engine.controller;
 
 import java.util.ArrayList;
 
-import game_engine.model.Enemy;
+import game_engine.model.living.Enemy;
 import game_engine.model.Entity;
-import game_engine.model.Living;
-import game_engine.model.Player;
-import game_engine.model.Wall;
+import game_engine.model.living.Living;
+import game_engine.model.living.Player;
+import game_engine.model.object.Wall;
 
 public class Game_Manager implements I_Game_Manager {
 	private  Game_Engine game_Engine;
