@@ -1,16 +1,15 @@
-package game_engine.model.living;
+package game_engine.entities.living;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import game_engine.controller.Runner;
-import game_engine.controller.Timer;
-import game_engine.model.Entity;
+import game_engine.util.Timer;
+import game_engine.entities.Entity;
 
 
 public abstract class Living extends Entity {
 	
-	private Timer hit_Timer = new Timer(0.2);
+	private Timer hit_Timer = new Timer(1);
 	
 	public String action = "STILL";
 	
@@ -26,11 +25,6 @@ public abstract class Living extends Entity {
 	public int block_y;
 	public int block_width = 0;
 	public int block_height = 0;
-	
-	public int long_x;
-	public int long_y;
-	public int long_width = 0;
-	public int long_height = 0;
 
 	public List<Entity> collided_entities = new ArrayList<>();
 

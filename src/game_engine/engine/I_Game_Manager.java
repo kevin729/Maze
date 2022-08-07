@@ -1,12 +1,14 @@
-package game_engine.controller;
+package game_engine.engine;
 
 import java.util.ArrayList;
 
-import game_engine.model.living.Enemy;
-import game_engine.model.Entity;
-import game_engine.model.living.Living;
-import game_engine.model.living.Player;
-import game_engine.model.object.Wall;
+import game_engine.level.Level;
+import game_engine.entities.Entity_Manager;
+import game_engine.entities.living.Enemy;
+import game_engine.entities.Entity;
+import game_engine.entities.living.Living;
+import game_engine.entities.living.Player;
+import game_engine.entities.object.Wall;
 
 public interface I_Game_Manager {
 	public int get_game_width();

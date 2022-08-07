@@ -1,11 +1,11 @@
-package game_engine.controller;
+package game_engine.util;
 
 public class Timer {
 	
 	public boolean running = false;
 	public boolean over = false;
 	private double timer = 0;
-	private double delay = 0;
+	private double delay;
 	
 	public Timer(double _delay) {
 		delay = _delay;

@@ -1,6 +1,8 @@
-package game_engine.controller;
+package game_engine.engine;
 
-import game_engine.controller.input.Keyboard;
+import game_engine.Runner;
+import game_engine.input.Keyboard;
+import game_engine.util.Timer;
 import game_engine.view.Game_Canvas;
 import game_engine.view.Game_Window;
 

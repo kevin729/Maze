@@ -1,9 +1,9 @@
-package game_engine.model.living;
+package game_engine.entities.living;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
 
-import game_engine.controller.Runner;
+import game_engine.Runner;
 
 public class Enemy extends Living {
 	

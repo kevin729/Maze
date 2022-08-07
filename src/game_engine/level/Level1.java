@@ -1,9 +1,10 @@
-package game_engine.controller;
+package game_engine.level;
 
-import game_engine.model.living.Enemy;
-import game_engine.model.living.Player;
-import game_engine.model.object.Door;
-import game_engine.model.object.Wall;
+import game_engine.engine.I_Game_Manager;
+import game_engine.entities.living.Enemy;
+import game_engine.entities.living.Player;
+import game_engine.entities.object.Door;
+import game_engine.entities.object.Wall;
 
 public class Level1 extends Level {
 
@@ -24,15 +25,6 @@ public class Level1 extends Level {
         em.add_entity(new Wall(game.get_game_width()/4, game.get_game_height()/2, 100, game.get_game_height()/2));
         em.add_entity(new Wall(game.get_game_width()/2, game.get_game_height()/2, 100, 20));
         em.add_entity(new Wall((int) (game.get_game_width()/1.3), game.get_game_height()/2, 100, 20));
-        em.add_entity(new Door(game.get_game_width() - 50, game.get_game_height()/3, 20, 100, Level2.getInstance(game)));
-    }
-
-    public static Level getInstance(I_Game_Manager game) {
-        if (level1 == null) {
-            level1 = new Level1();
-            level1.setupLevel(game);
-        }
-
-        return level1;
+        em.add_entity(new Door(game.get_game_width() - 50, game.get_game_height()/3, 20, 100, Level.getInstance(game, 1)));
     }
 }

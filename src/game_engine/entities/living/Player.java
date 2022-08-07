@@ -1,12 +1,10 @@
-package game_engine.model.living;
+package game_engine.entities.living;
 
 import java.awt.Color;
-import java.util.List;
 
-import game_engine.controller.Runner;
-import game_engine.controller.input.Keyboard;
-import game_engine.model.Entity;
-import game_engine.model.object.Door;
+import game_engine.Runner;
+import game_engine.input.Keyboard;
+import game_engine.entities.object.Door;
 
 public class Player extends Living {
 	

@@ -1,4 +1,8 @@
-package game_engine.controller;
+package game_engine;
+
+import game_engine.engine.Game_Manager;
+import game_engine.engine.I_Game_Manager;
+import game_engine.level.Level;
 
 public class Runner {
 	
@@ -13,9 +17,7 @@ public class Runner {
 	}
 	
 	public static void restart() {
-		Level level = Level1.getInstance(game);
-
-		game.setLevel(level);
+		game.setLevel(Level.getInstance(game, 0));
 		game.start();
 	}
 	

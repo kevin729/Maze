@@ -1,4 +1,4 @@
-package game_engine.controller.input;
+package game_engine.input;
 
 
 import java.awt.event.KeyEvent;

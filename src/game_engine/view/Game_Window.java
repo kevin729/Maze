@@ -1,14 +1,6 @@
 package game_engine.view;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-
-import game_engine.controller.Runner;
-
 
 
 public class Game_Window extends JFrame {

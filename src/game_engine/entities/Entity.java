@@ -1,9 +1,8 @@
-package game_engine.model;
+package game_engine.entities;
 
-import game_engine.controller.Runner;
+import game_engine.Runner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public abstract class Entity {
 		

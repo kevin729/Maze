@@ -11,12 +11,11 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-import game_engine.controller.Game_Engine;
-import game_engine.controller.Game_Manager;
-import game_engine.controller.I_Game_Manager;
-import game_engine.controller.Runner;
-import game_engine.controller.Timer;
-import game_engine.controller.input.Keyboard;
+import game_engine.engine.Game_Engine;
+import game_engine.engine.I_Game_Manager;
+import game_engine.Runner;
+import game_engine.util.Timer;
+import game_engine.input.Keyboard;
 
 public class Game_Canvas extends Canvas {
 	

@@ -1,13 +1,10 @@
-package game_engine.model.object;
+package game_engine.entities.object;
 
-import game_engine.controller.Level;
-import game_engine.controller.Runner;
-import game_engine.model.Entity;
+import game_engine.level.Level;
+import game_engine.Runner;
+import game_engine.entities.Entity;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Door extends Entity {
 

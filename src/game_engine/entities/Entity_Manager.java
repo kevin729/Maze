@@ -1,8 +1,6 @@
-package game_engine.controller;
+package game_engine.entities;
 
 import java.util.ArrayList;
-
-import game_engine.model.Entity;
 
 public class Entity_Manager {
 	private ArrayList<Entity> entities = new ArrayList<Entity>();

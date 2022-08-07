@@ -1,14 +1,14 @@
-package game_engine.model.object;
+package game_engine.entities.object;
 
-import game_engine.controller.Runner;
-import game_engine.model.living.Living;
+import game_engine.Runner;
+import game_engine.entities.living.Living;
 
 import java.awt.*;
 
-public class MovingWall2 extends Living {
-    int angle = 180;
+public class MovingWall1 extends Living {
+    int angle = 0;
 
-    public MovingWall2(int _x, int _y, int width, int height) {
+    public MovingWall1(int _x, int _y, int width, int height) {
         super(_x, _y, width, height, "Wall");
         alive = false;
     }
