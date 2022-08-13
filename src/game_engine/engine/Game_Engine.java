@@ -3,6 +3,7 @@ package game_engine.engine;
 import game_engine.Runner;
 import game_engine.input.Keyboard;
 import game_engine.util.Timer;
+import game_engine.view.Camera;
 import game_engine.view.Game_Canvas;
 import game_engine.view.Game_Window;
 
@@ -22,7 +23,7 @@ public class Game_Engine {
 	public Game_Engine(Game_Manager game) {
 		game_Canvas = new Game_Canvas(game);
 		new Game_Window(game_Canvas);
-		
+
 		keyboard = Keyboard.get_Instance();
 		game_Canvas.addKeyListener(keyboard);
 		game_over = new Timer(2);

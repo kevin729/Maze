@@ -9,18 +9,25 @@ import game_engine.entities.Entity;
 import game_engine.entities.living.Living;
 import game_engine.entities.living.Player;
 import game_engine.entities.object.Wall;
+import game_engine.util.Timer;
+import game_engine.view.Camera;
 
 public class Game_Manager implements I_Game_Manager {
 	private  Game_Engine game_Engine;
-	private int resolution_Width = 600;
-	private int resolution_Height = 300;
-	private int game_Width = 900;
-	private int game_Height = 600;
-	private boolean testing = false;
+
+	private int resolution_Width = 1200;
+	private int resolution_Height = 600;
+	private int game_Width = 300;
+	private int game_Height = 300;
+
 	private Level level;
+	private Camera camera;
+	private Timer timer;
 	
 	public Game_Manager() {
 		game_Engine = new Game_Engine(this);
+		timer = new Timer(2);
+		camera = new Camera();
 	}
 	
 	@Override
@@ -130,21 +137,17 @@ public class Game_Manager implements I_Game_Manager {
 	}
 
 	@Override
+	public Timer get_timer() {
+		return timer;
+	}
+
+	@Override
+	public Camera get_camera() {
+		return camera;
+	}
+
+	@Override
 	public Game_Engine get_game_engine() {
 		return game_Engine;
 	}
-
-	@Override
-	public boolean get_Testing() {
-		return testing;
-	}
-
-
-
-	@Override
-	public void set_Testing(boolean _testing) {
-		testing = _testing;
-	}
-
-
 }

@@ -3,6 +3,7 @@ package game_engine.entities.object;
 import game_engine.level.Level;
 import game_engine.Runner;
 import game_engine.entities.Entity;
+import game_engine.view.Camera;
 
 import java.awt.*;
 
@@ -26,6 +27,7 @@ public class Door extends Entity {
 
     @Override
     public void render() {
-        Runner.get_context().render_entity(x, y, width, height, Color.PINK.getRGB());
+        Camera camera = Runner.get_context().get_camera();
+        Runner.get_context().render_entity(x - camera.getX(), y - camera.getY(), width, height, Color.PINK.getRGB());
     }
 }

@@ -60,7 +60,7 @@ public class Game_Canvas extends Canvas {
 		} else {
 			Runner.get_context().getLevel().render();
 		}
-			
+
 		//Render
 		Graphics graphics = buffer_Strategy.getDrawGraphics();
 		graphics.drawImage(image, 0, 0, getWidth(), getHeight(), null);

@@ -9,32 +9,34 @@ import game_engine.entities.Entity;
 import game_engine.entities.living.Living;
 import game_engine.entities.living.Player;
 import game_engine.entities.object.Wall;
+import game_engine.util.Timer;
+import game_engine.view.Camera;
 
 public interface I_Game_Manager {
-	public int get_game_width();
-	public int get_game_height();
-	public int get_resolution_width();
-	public int get_resolution_height();
-	public Entity_Manager get_entity_manager();
-	public ArrayList<Entity> get_entities();
-	public Game_Engine get_game_engine();
-	public boolean get_Testing();
-	public Living get_player();
-	public Living get_enemy();
-	
-	public void set_game_width(int w);
-	public void set_game_height(int h);
-	public void set_Testing(boolean _testing);
-	
-	public void add_player(Player p);
-	public void add_enemy(Enemy e);
-	public void add_wall(Wall w);
-	
-	public void start();
-	public void stop();
-	public void render_entity(double x, double y, double w, double h, int c);
-	public void render_entity(double x, double y, double w, double h, String t);
+	int get_game_width();
+	int get_game_height();
+	int get_resolution_width();
+	int get_resolution_height();
+	Entity_Manager get_entity_manager();
+	ArrayList<Entity> get_entities();
+	Game_Engine get_game_engine();
+	Living get_player();
+	Living get_enemy();
+	Timer get_timer();
+	Camera get_camera();
 
-	public Level getLevel();
-	public void setLevel(Level level);
+	void set_game_width(int w);
+	void set_game_height(int h);
+	
+	void add_player(Player p);
+	void add_enemy(Enemy e);
+	void add_wall(Wall w);
+	
+	void start();
+	void stop();
+	void render_entity(double x, double y, double w, double h, int c);
+	void render_entity(double x, double y, double w, double h, String t);
+
+	Level getLevel();
+	void setLevel(Level level);
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import game_engine.Runner;
 import game_engine.entities.Entity;
+import game_engine.view.Camera;
 
 public class Wall extends Entity {
 
@@ -18,6 +19,7 @@ public class Wall extends Entity {
 
 	@Override
 	public void render() {
-		Runner.get_context().render_entity(x, y, width, height, Color.MAGENTA.getRGB());
+		Camera camera = Runner.get_context().get_camera();
+		Runner.get_context().render_entity(x - camera.getX(), y - camera.getY(), width, height, Color.MAGENTA.getRGB());
 	}
 }

@@ -66,12 +66,14 @@ public abstract class Entity {
 			}
 
 			//up
-			if ((_y >= entity.y  && _y <= entity.y + entity.height) &&
+			if ((_y >= eY  && _y <= eY + entity.height) &&
 					(x < entity.x + entity.width && x + width > entity.x)) {
 				entities.add(entity);
 				if (!living && !combat) {
-					entity.y = y - entity.height - 1;
+					entity.y = (int) (y - entity.height - Math.abs(y_speed));
 					entity.bottom = true;
+				} else {
+					y_speed = 0;
 				}
 			}
 
