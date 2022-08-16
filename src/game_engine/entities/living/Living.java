@@ -9,12 +9,12 @@ import game_engine.entities.Entity;
 
 public abstract class Living extends Entity {
 	
-	private Timer hit_Timer = new Timer(1);
+	protected Timer hit_Timer = new Timer(1);
 	
 	public String action = "STILL";
 	
 	protected int health = 20;
-	protected int speed = 6;
+	protected int speed = 3;
 	
 	public int attack_x;
 	public int attack_y;
@@ -51,7 +51,11 @@ public abstract class Living extends Entity {
 		move_y_axis(g);
 	}
 
-	private void apply_friction(double f) {	
+	private void apply_friction(double f) {
+		if (hit_Timer.running) {
+			return;
+		}
+
 		if (x_speed > f) {
 			x_speed -= f;
 		} else if (x_speed < -f) {
@@ -86,7 +90,7 @@ public abstract class Living extends Entity {
 		y += y_speed;
 	}
 
-	private void detect_attack() {
+	protected void detect_attack() {
 		ArrayList<Entity> entities = collision_detect(attack_x, attack_y, attack_width, attack_height, false, true);
 		for (Entity e : entities) {
 			if (e instanceof Living) {
@@ -142,7 +146,7 @@ public abstract class Living extends Entity {
 		if (!hit_Timer.running) {
 			health -= damage;
 			hit_Timer.tick();
-			//jump();
+			y_speed = -10;
 		}
 
 		return hit;

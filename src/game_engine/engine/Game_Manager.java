@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import game_engine.level.Level;
 import game_engine.entities.Entity_Manager;
-import game_engine.entities.living.Enemy;
+import game_engine.entities.living.enemies.Enemy;
 import game_engine.entities.Entity;
 import game_engine.entities.living.Living;
 import game_engine.entities.living.Player;
@@ -28,6 +28,7 @@ public class Game_Manager implements I_Game_Manager {
 		game_Engine = new Game_Engine(this);
 		timer = new Timer(2);
 		camera = new Camera();
+		level = Level.getInstance(this, 1);
 	}
 	
 	@Override

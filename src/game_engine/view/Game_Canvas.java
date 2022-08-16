@@ -14,23 +14,21 @@ import java.awt.image.DataBufferInt;
 import game_engine.engine.Game_Engine;
 import game_engine.engine.I_Game_Manager;
 import game_engine.Runner;
+import game_engine.entities.living.Living;
+import game_engine.entities.living.Player;
+import game_engine.level.Level;
 import game_engine.util.Timer;
 import game_engine.input.Keyboard;
 
 public class Game_Canvas extends Canvas {
-	
-	private BufferedImage image;
-	private int[] pixels;
+
 	private String result = "";
 	
 	public Game_Canvas(I_Game_Manager game) {	
 		Toolkit.getDefaultToolkit().setDynamicLayout(false);
 		requestFocus();
 		addKeyListener(Keyboard.get_Instance());
-		
-		image = new BufferedImage(game.get_game_width(), game.get_game_height(), BufferedImage.TYPE_INT_RGB);
-		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
-		
+
 		Dimension size = new Dimension(game.get_resolution_width(), game.get_resolution_height());
 		setPreferredSize(size);
 	}
@@ -46,24 +44,26 @@ public class Game_Canvas extends Canvas {
 			createBufferStrategy(3);
 			return;
 		}
-		
-		//Clear
+
 		clear();
 		
 		Timer game_over = Game_Engine.game_over;
-		//Draw
-		if (Runner.get_context().get_player().get_Health() <= 0 && !game_over.running) {
+
+		Living player = Runner.get_context().get_player();
+		Level level = Runner.get_context().getLevel();
+
+		if ((player.get_Health() <= 0 || player.y > level.getHeight()) && !game_over.running) {
 			result = "GAME OVER";
+			level.setupLevel(Runner.get_context());
 			game_over.tick();
 		} else if (game_over.running) {
-			draw_Entity((Runner.get_context().get_game_width()/2)-150, (Runner.get_context().get_game_height()/2), 100, 100, result);
+			draw_Entity((level.getViewWidth()/2)-150, (level.getViewHeight()/2), 100, 100, result);
 		} else {
 			Runner.get_context().getLevel().render();
 		}
 
-		//Render
 		Graphics graphics = buffer_Strategy.getDrawGraphics();
-		graphics.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		graphics.drawImage(Runner.get_context().getLevel().getImage(), 0, 0, getWidth(), getHeight(), null);
 				
 		//Display
 		Toolkit.getDefaultToolkit().sync();
@@ -72,34 +72,19 @@ public class Game_Canvas extends Canvas {
 	}
 	
 	public void clear() {
-		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0;
+		for (int i = 0; i < Runner.get_context().getLevel().getPixels().length; i++) {
+			Runner.get_context().getLevel().getPixels()[i] = 0;
 		}
 	}
 	
 	public void draw_Entity(int _x, int _y, int _width, int _height, int color) {
-		Graphics2D g = image.createGraphics();
+		Graphics2D g = Runner.get_context().getLevel().getImage().createGraphics();
 		g.setColor(new Color(color));
 		g.fillRect(_x, _y, _width, _height);
-		
-//		for (int y = _y; y < _y+_height; y++) {
-//			for (int x = _x; x < _x+_width; x++) {
-//				
-//				
-//				if (x + y * Runner.get_context().get_resolution_width() > pixels.length || 
-//					x < 0 || y < 0 || 
-//					x > Runner.get_context().get_resolution_width() || 
-//					y > Runner.get_context().get_resolution_height()) {
-//					continue;
-//				}
-//				
-//				pixels[x + y * Runner.get_context().get_resolution_width()] = color;
-//			}
-//		}
 	}
 	
 	public void draw_Entity(int _x, int _y, int _width, int _height, String text) {
-		Graphics2D g = image.createGraphics();
+		Graphics2D g = Runner.get_context().getLevel().getImage().createGraphics();
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("TimesRoman", Font.BOLD, _width/2));
 		

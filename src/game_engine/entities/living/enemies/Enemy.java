@@ -1,17 +1,18 @@
-package game_engine.entities.living;
+package game_engine.entities.living.enemies;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
 
 import game_engine.Runner;
+import game_engine.entities.living.Living;
 import game_engine.view.Camera;
 
 public class Enemy extends Living {
 	
 	private DecimalFormat df = new DecimalFormat("0.00");
 	
-	public Enemy(int x, int y,  int width, int height) {
-		super(x, y, width, height, "Enemy");
+	public Enemy(int x, int y) {
+		super(x, y, 20, 20, "Enemy");
 	}
 	
 	@Override

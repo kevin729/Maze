@@ -69,7 +69,7 @@ public abstract class Entity {
 			if ((_y >= eY  && _y <= eY + entity.height) &&
 					(x < entity.x + entity.width && x + width > entity.x)) {
 				entities.add(entity);
-				if (!living && !combat) {
+				if (!living && entity.alive && !combat) {
 					entity.y = (int) (y - entity.height - Math.abs(y_speed));
 					entity.bottom = true;
 				} else {
@@ -80,7 +80,6 @@ public abstract class Entity {
 			//bottom
 			if ((_y + height >= eY && _y + height <= eY + entity.height) &&
 					(x <= eX + entity.width && x + width >= eX)) {
-				//entities.add(entity.get_name());
 				if (living) {
 					grounded = true;
 					y_speed = 0;
@@ -100,7 +99,7 @@ public abstract class Entity {
 					y_speed = 0;
 					grounded = true;
 				} else if (combat && entity.alive) {
-					entity.x_speed = 5;
+					entity.x_speed = 4;
 				}
 			}
 
@@ -116,7 +115,7 @@ public abstract class Entity {
 					y_speed = 0;
 					grounded = true;
 				} else if (combat && entity.alive) {
-					entity.x_speed = -5;
+					entity.x_speed = -4;
 				}
 			}
 		}

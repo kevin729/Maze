@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import game_engine.level.Level;
 import game_engine.entities.Entity_Manager;
-import game_engine.entities.living.Enemy;
+import game_engine.entities.living.enemies.Enemy;
 import game_engine.entities.Entity;
 import game_engine.entities.living.Living;
 import game_engine.entities.living.Player;

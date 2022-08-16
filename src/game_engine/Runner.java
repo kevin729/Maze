@@ -17,7 +17,6 @@ public class Runner {
 	}
 	
 	public static void restart() {
-		game.setLevel(Level.getInstance(game, 0));
 		game.start();
 	}
 	
